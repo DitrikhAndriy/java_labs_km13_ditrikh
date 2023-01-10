@@ -18,9 +18,7 @@ public class Vectors {
     }
 
     public Vectors(Vectors vectorsToOrt) {
-        this.n = vectorsToOrt.n;
-        this.m = vectorsToOrt.m;
-        this.vectors = new double[n][m];
+        VectorsInit(vectorsToOrt.n, vectorsToOrt.m);
 
         for (int i = 0; i < n; i++) {
             double[] res = vectorsToOrt.vectors[i];
@@ -30,6 +28,7 @@ public class Vectors {
             }
             this.vectors[i] = res;
         }
+        new Saving(vectorsToOrt.vectors, this.vectors);
     }
 
     private void VectorsInit(int n, int m) {

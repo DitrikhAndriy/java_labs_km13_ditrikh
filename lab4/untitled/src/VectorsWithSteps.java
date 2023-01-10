@@ -17,24 +17,22 @@ public class VectorsWithSteps {
         }
     }
 
-    public VectorsWithSteps(VectorsWithSteps ortVectors) {
-        this.n = ortVectors.n;
-        this.m = ortVectors.m;
-        this.vectors = new double[n][m];
+    public VectorsWithSteps(VectorsWithSteps vectorsToOrt) {
+        VectorsInit(vectorsToOrt.n, vectorsToOrt.m);
 
         System.out.print("Кроки виконання:");
         for (int i = 0; i < this.n; i++) {
-            double[] res = ortVectors.vectors[i];
+            double[] res = vectorsToOrt.vectors[i];
 
             System.out.print("\nu" + (i + 1) + " = ");
-            ortVectors.vectorGet(i + 1);
+            vectorsToOrt.vectorGet(i + 1);
 
             for (int j = 0; j < i; j++) {
-                double[] temp = multi(mult(ortVectors.vectors[i], vectors[j])/mult(vectors[j], vectors[j]), vectors[j]);
+                double[] temp = multi(mult(vectorsToOrt.vectors[i], vectors[j])/mult(vectors[j], vectors[j]), vectors[j]);
                 res = ret(res, temp);
 
                 System.out.print(" - (");
-                ortVectors.vectorGet(i + 1);
+                vectorsToOrt.vectorGet(i + 1);
                 System.out.print(";");
                 this.vectorGet(j + 1);
                 System.out.print(")/(");
@@ -47,6 +45,7 @@ public class VectorsWithSteps {
             this.vectors[i] = res;
         }
         System.out.println();
+        new Saving(vectorsToOrt.vectors, this.vectors);
     }
 
     private void VectorsInit(int n, int m) {
@@ -106,7 +105,6 @@ public class VectorsWithSteps {
             System.out.println();
         }
     }
-
 
     public void vectorGet(int v) {
         System.out.print("(");
